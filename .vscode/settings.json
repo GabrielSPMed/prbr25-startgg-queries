@@ -1,0 +1,22 @@
+{
+    // Use the Python interpreter from your Poetry virtualenv
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+    "ruff.lineLength": 88,
+    "ruff.lint.select": [
+        "E",
+        "F",
+        "W",
+        "C",
+        "I",
+        "B",
+        "E501"
+    ],
+    "editor.formatOnSave": true,
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "always"
+    },
+    "editor.inlineSuggest.enabled": false
+}

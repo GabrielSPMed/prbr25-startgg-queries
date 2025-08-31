@@ -1,15 +1,17 @@
-[project]
+[tool.poetry]
 name = "startgg-queries"
 version = "0.1.0"
 description = ""
-authors = [
-    {name = "Gabriel Medeiros",email = "gabrielspmedeiros@gmail.com"}
-]
+authors = []
 readme = "README.md"
-requires-python = ">=3.12"
-dependencies = [
-]
+packages = [{ include = "prbr25-startgg-queries", from = "src" }]
+include = ["src/startgg/queries/*.graphql"]
 
+[tool.poetry.dependencies]
+python = ">=3.12,<4.0"
+dotenv = "^0.9.9"
+requests = "^2.32.5"
+gql = {extras = ["all"], version = "^4.0.0"}
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -19,4 +21,3 @@ build-backend = "poetry.core.masonry.api"
 pytest = "^8.4.1"
 mypy = "^1.17.1"
 pre-commit = "^4.3.0"
-

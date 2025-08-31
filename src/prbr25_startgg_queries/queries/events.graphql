@@ -1,0 +1,54 @@
+query TournamentsByCountry(
+    $cCode: String!
+    $perPage: Int!
+    $cPage: Int!
+    $videogameid: ID!
+    $online: Boolean!
+    $afterdate: Timestamp!
+    $beforedate: Timestamp!
+) {
+    tournaments(
+        query: {
+            perPage: $perPage
+            filter: {
+                countryCode: $cCode
+                videogameIds: [$videogameid]
+                afterDate: $afterdate
+                beforeDate: $beforedate
+                upcoming: false
+                hasOnlineEvents: $online
+            }
+            page: $cPage
+        }
+    ) {
+        nodes {
+            id
+            name
+            addrState
+            city
+            url(relative: false)
+            events(filter: { videogameId: [$videogameid] }) {
+                id
+                state
+                name
+                type
+                phases {
+                    bracketType
+                    name
+                    id
+                }
+                numEntrants
+                startAt
+                updatedAt
+            }
+        }
+        pageInfo {
+            total
+            totalPages
+            page
+            perPage
+            sortBy
+            filter
+        }
+    }
+}

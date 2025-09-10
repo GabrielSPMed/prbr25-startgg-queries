@@ -19,8 +19,11 @@ def extract_phase_and_event_from_response(response: List) -> Tuple[List, List]:
     event_list = []
     phase_list = []
     for tournament in response:
-        event_list.extend(extract_events_and_phases_from_tournament(tournament)[0])
-        phase_list.extend(extract_events_and_phases_from_tournament(tournament)[1])
+        events_and_phases_in_tournament = extract_events_and_phases_from_tournament(
+            tournament
+        )
+        event_list.extend(events_and_phases_in_tournament[0])
+        phase_list.extend(events_and_phases_in_tournament[1])
     return event_list, phase_list
 
 

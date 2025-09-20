@@ -5,6 +5,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 STARTGG_BEARER_TOKEN = environ["STARTGG_BEARER_TOKEN"]
+POSTGRES_USERNAME = environ["POSTGRES_USERNAME"]
+POSTGRES_PASSWORD = environ["POSTGRES_PASSWORD"]
+POSTGRES_PORT = int(environ["POSTGRES_PORT"])
+POSTGRES_DB = environ["POSTGRES_DB"]
+POSTGRES_HOST = environ["POSTGRES_HOST"]
 
 events_dict = {
     "cCode": "BR",

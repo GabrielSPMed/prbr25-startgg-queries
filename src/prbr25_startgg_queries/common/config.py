@@ -11,15 +11,18 @@ POSTGRES_PORT = int(environ["POSTGRES_PORT"])
 POSTGRES_DB = environ["POSTGRES_DB"]
 POSTGRES_HOST = environ["POSTGRES_HOST"]
 MAX_DATE_LIMIT = int(environ["MAX_DATE_LIMIT"])
+MIN_DATE_LIMIT = int(environ["MIN_DATE_LIMIT"])
+COUNTRY_CODE = environ["COUNTRY_CODE"]
+STARTGG_VIDEOGAME_ID = int(environ["STARTGG_VIDEOGAME_ID"])
 
 events_dict = {
-    "cCode": "BR",
+    "cCode": COUNTRY_CODE,
     "perPage": 50,
     "cPage": 1,
-    "videogameid": 1386,
+    "videogameid": STARTGG_VIDEOGAME_ID,
     "online": False,
-    "afterdate": 1735700400,
-    "beforedate": 1755494257,
+    "afterdate": MIN_DATE_LIMIT,
+    "beforedate": MAX_DATE_LIMIT,
 }
 
 event_table_columns = [

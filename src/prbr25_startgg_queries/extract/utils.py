@@ -1,5 +1,8 @@
 from prbr25_startgg_queries.common.config import STARTGG_BEARER_TOKEN, events_dict
+from prbr25_startgg_queries.common.logger import setup_logger
 from prbr25_startgg_queries.extract.graphql import GraphQL
+
+logger = setup_logger(__name__)
 
 
 def request_events(start_date: int, end_date: int):

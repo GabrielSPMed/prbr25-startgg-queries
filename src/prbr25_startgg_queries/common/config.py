@@ -10,6 +10,7 @@ POSTGRES_PASSWORD = environ["POSTGRES_PASSWORD"]
 POSTGRES_PORT = int(environ["POSTGRES_PORT"])
 POSTGRES_DB = environ["POSTGRES_DB"]
 POSTGRES_HOST = environ["POSTGRES_HOST"]
+MAX_DATE_LIMIT = int(environ["MAX_DATE_LIMIT"])
 
 events_dict = {
     "cCode": "BR",

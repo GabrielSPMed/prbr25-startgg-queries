@@ -49,7 +49,7 @@ class Postgres:
             inserted_rows = result.rowcount
             conn.execute(text(f"DROP TABLE {table_name}_tmp;"))
         logger.info(
-            f"Finished uploading data for {table_name}, inserted {inserted_rows} events"
+            f"Finished uploading data for {table_name}, inserted {inserted_rows} rows"
         )
         return inserted_rows
 

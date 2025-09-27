@@ -4,14 +4,14 @@ version = "0.1.0"
 description = ""
 authors = []
 readme = "README.md"
-packages = [{ include = "prbr25-startgg-queries", from = "src" }]
+packages = [{ include = "prbr25_startgg_queries", from = "src" }]
 include = ["src/startgg/queries/*.graphql"]
 
 [tool.poetry.dependencies]
 python = ">=3.12,<4.0"
 dotenv = "^0.9.9"
 requests = "^2.32.5"
-gql = {extras = ["all"], version = "^4.0.0"}
+gql = { extras = ["all"], version = "^4.0.0" }
 pandas = "^2.3.2"
 sqlalchemy = "^2.0.43"
 psycopg2-binary = "^2.9.10"

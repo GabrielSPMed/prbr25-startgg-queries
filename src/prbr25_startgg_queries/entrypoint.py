@@ -41,19 +41,3 @@ def refresh_raw_events():
     )
     sql.insert_values_to_table(event_df, "raw_events")
     sql.insert_values_to_table(phase_df, "raw_phases")
-
-
-# def main():
-#     if len(sys.argv) != 3:
-#         print("Usage: <start_timestamp> <end_timestamp>", file=sys.stderr)
-#         sys.exit(1)
-
-#     start_ts, end_ts = map(int, sys.argv[1:3])
-#     get_events_and_phases(start_ts, end_ts)
-
-
-# if __name__ == "__main__":
-#     main()
-
-
-refresh_raw_events()

@@ -1,7 +1,11 @@
 from typing import Dict, List, Tuple
 
+from pandas import DataFrame
 
-def extract_phase_and_event_from_response(response: List) -> Tuple[List, List]:
+
+def extract_phase_and_event_from_response(
+    response: List,
+) -> Tuple[DataFrame, DataFrame]:
     """
     Extracts events and phases from a list of tournament responses.
 
@@ -24,7 +28,7 @@ def extract_phase_and_event_from_response(response: List) -> Tuple[List, List]:
         )
         event_list.extend(events_and_phases_in_tournament[0])
         phase_list.extend(events_and_phases_in_tournament[1])
-    return event_list, phase_list
+    return DataFrame(event_list), DataFrame(phase_list)
 
 
 def extract_events_and_phases_from_tournament(tournament: Dict) -> Tuple[List, List]:

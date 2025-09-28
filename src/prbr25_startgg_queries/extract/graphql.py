@@ -11,27 +11,27 @@ logger = setup_logger(__name__)
 
 class GraphQL:
     """
-    A class for interacting with the start.gg GraphQL API.
+    GraphQL client for interacting with the StartGG API using GraphQL queries.
 
     Attributes:
-        transport (RequestsHTTPTransport): The HTTP transport for GraphQL requests.
-        client (Client): The GraphQL client for executing queries.
+        transport (RequestsHTTPTransport): HTTP transport for GraphQL requests.
+        client (Client): GraphQL client instance.
 
     Methods:
         __init__(bearer_token: str):
             Initializes the GraphQL client with the provided bearer token.
 
         _load_query(query_name: str) -> str:
-            Loads a GraphQL query from a file in the 'queries' package based on the
-            query name.
+            Loads a GraphQL query from the queries resource folder by name.
 
         execute_query(query_name: str, query_parameters: Dict):
-            Executes a GraphQL query with the given name and parameters, returning the
-            response.
+            Executes a GraphQL query with the given parameters and returns the response.
 
-        query_all_pages(query_name: str, query_parameters: Dict):
-            Executes a paginated GraphQL query, retrieving all pages of results and
-            returning a combined list.
+        query_all_pages_tournaments(query_name: str, query_parameters: Dict):
+            Queries all pages of tournaments, handling pagination, and returns a list of tournaments.
+
+        query_tournament(query_name: str, query_parameters: Dict):
+            Queries a single tournament and returns it in a list.
     """
 
     def __init__(self, bearer_token: str):
@@ -62,7 +62,7 @@ class GraphQL:
         query.variable_values = query_parameters
         return self.client.execute(query)
 
-    def query_all_pages(self, query_name: str, query_parameters: Dict):
+    def query_all_pages_tournaments(self, query_name: str, query_parameters: Dict):
         tournaments = []
         page_number = 1
         logger.info("Starting StartGG queries")
@@ -77,3 +77,9 @@ class GraphQL:
             query_parameters["cPage"] = page_number
         logger.info("All queries finished successfully")
         return tournaments
+
+    def query_tournament(self, query_name: str, query_parameters: Dict):
+        logger.info("Querying tournament")
+        response = self.execute_query(query_name, query_parameters)
+        logger.info("Query successful")
+        return [response["tournament"]]

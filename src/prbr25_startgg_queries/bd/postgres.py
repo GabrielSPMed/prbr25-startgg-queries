@@ -34,24 +34,34 @@ class Postgres:
         )
         logger.debug("Created sqlalchemy engine")
 
-    def insert_values_to_table(self, df: DataFrame, table_name: str) -> int:
+    def insert_values_to_table(self, df: DataFrame, table_name: str):
         logger.info(f"Started to upload table data for {table_name}")
         df.to_sql(f"{table_name}_tmp", self.engine, if_exists="replace", index=False)
         logger.debug(f"Starting to merge {table_name}_tmp")
-        with self.engine.begin() as conn:
-            result = conn.execute(
-                text(f"""
+        query = f"""
                 INSERT INTO {table_name}
                 SELECT * FROM {table_name}_tmp
-                ON CONFLICT (id) DO NOTHING;
-            """)
-            )
-            inserted_rows = result.rowcount
+                ON CONFLICT (id) DO NOTHING
+            """
+        if logger.level == 10 and table_name == "raw_events":
+            query = f"""
+                INSERT INTO {table_name}
+                SELECT * FROM {table_name}_tmp
+                ON CONFLICT (id) DO NOTHING
+                RETURNING tournament_name, event_name
+            """
+        with self.engine.begin() as conn:
+            result = conn.execute(text(query))
             conn.execute(text(f"DROP TABLE {table_name}_tmp;"))
-        logger.info(
-            f"Finished uploading data for {table_name}, inserted {inserted_rows} rows"
-        )
-        return inserted_rows
+        if logger.level == 10 and table_name == "raw_events":
+            logger.debug("The tournaments inserted were:")
+            for row in result.fetchall():
+                logger.debug(f"\t{row[0]}: {row[1]}")
+        else:
+            inserted_rows = result.rowcount
+            logger.info(
+                f"Finished uploading data for {table_name}, inserted {inserted_rows} rows"
+            )
 
     def query_db(self, query: str, table_name: str) -> DataFrame:
         logger.info(f"Performing query on {table_name}")

@@ -1,0 +1,26 @@
+query FindTournamentByURL (
+    $tournamentslug: String!
+    $videogameid: ID!
+) {
+    tournament(slug: $tournamentslug) {
+        name
+        url
+        id
+        addrState
+        city
+        events(filter: { videogameId: [$videogameid] }) {
+            id
+            name
+            numEntrants
+            type
+            updatedAt
+            state
+            startAt
+            phases {
+                id
+                bracketType
+                name
+            }
+        }
+    }
+}

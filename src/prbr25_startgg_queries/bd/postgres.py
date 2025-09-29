@@ -54,9 +54,13 @@ class Postgres:
             result = conn.execute(text(query))
             conn.execute(text(f"DROP TABLE {table_name}_tmp;"))
         if logger.level == 10 and table_name == "raw_events":
-            logger.debug("The tournaments inserted were:")
-            for row in result.fetchall():
-                logger.debug(f"\t{row[0]}: {row[1]}")
+            uploaded_events = result.fetchall()
+            if len(uploaded_events) > 0:
+                logger.debug("The tournaments inserted were:")
+                for row in result.fetchall():
+                    logger.debug(f"\t{row[0]}: {row[1]}")
+            else:
+                logger.debug("Every tournament's events are already in the database")
         else:
             inserted_rows = result.rowcount
             logger.info(

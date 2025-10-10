@@ -1,7 +1,8 @@
 from datetime import datetime, timedelta
 from typing import List, Tuple
 
-from prbr25_startgg_queries.bd.postgres import Postgres
+from prbr25_rds_client.postgres import Postgres
+
 from prbr25_startgg_queries.common.config import (
     MAX_DATE_LIMIT,
     STARTGG_BEARER_TOKEN,

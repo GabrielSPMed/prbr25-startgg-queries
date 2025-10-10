@@ -1,4 +1,5 @@
-from prbr25_startgg_queries.bd.postgres import Postgres
+from prbr25_rds_client.postgres import Postgres
+
 from prbr25_startgg_queries.common.config import (
     POSTGRES_DB,
     POSTGRES_HOST,

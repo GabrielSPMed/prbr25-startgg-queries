@@ -70,8 +70,6 @@ def retrieve_events_and_phases_from_tournament_url(url: str):
 
 
 def edit_filtered_column_from_id(ids: list, table_name: str, column_name: str, value):
-    # edit_filtered_column_from_id(["1505851"], "raw_events", "validated", "FALSE")
-    # For bool "TRUE", for string "'test'"
     sql = Postgres(
         POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DB, POSTGRES_PORT
     )

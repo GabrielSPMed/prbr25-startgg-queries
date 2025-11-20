@@ -7,6 +7,7 @@ from prbr25_startgg_queries.common.config import (
     POSTGRES_PORT,
     POSTGRES_USERNAME,
 )
+from prbr25_startgg_queries.common.list_utils import comma_separate_string_list
 from prbr25_startgg_queries.common.logger import setup_logger
 from prbr25_startgg_queries.extract.refresh_raw import (
     extract_event_and_phase_dfs_from_timestamp,
@@ -15,6 +16,7 @@ from prbr25_startgg_queries.extract.tournament_from_url import (
     request_tournament_from_url,
 )
 from prbr25_startgg_queries.load.utils import load_pandas_dataframes_into_postgres
+from prbr25_startgg_queries.queries.sql_queries import get_update_query
 from prbr25_startgg_queries.transform.utils import (
     transform_tournaments_to_event_phases_df,
 )
@@ -65,3 +67,14 @@ def retrieve_events_and_phases_from_tournament_url(url: str):
     load_pandas_dataframes_into_postgres(
         sql, {"raw_events": event_df, "raw_phases": phase_df}
     )
+
+
+def edit_filtered_column_from_id(ids: list, table_name: str, column_name: str, value):
+    # edit_filtered_column_from_id(["1505851"], "raw_events", "validated", "FALSE")
+    # For bool "TRUE", for string "'test'"
+    sql = Postgres(
+        POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DB, POSTGRES_PORT
+    )
+    id_cs = comma_separate_string_list(ids)
+    query = get_update_query(table_name, column_name, id_cs, value)
+    sql.execute_update(query)

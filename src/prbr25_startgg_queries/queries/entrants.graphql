@@ -1,0 +1,23 @@
+query Event($eventid: ID!, $cPage: Int!, $perPage: Int) {
+    event(id: $eventid) {
+        entrants(query: { page: $cPage, perPage: $perPage }) {
+            nodes {
+                id
+                participants {
+                    user {
+                        slug
+                        player {
+                            id
+                            gamerTag
+                        }
+                    }
+                }
+                name
+            }
+            pageInfo {
+                totalPages
+            }
+        }
+        id
+    }
+}

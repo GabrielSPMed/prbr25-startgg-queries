@@ -1,6 +1,7 @@
 from prbr25_rds_client.postgres import Postgres
 
 from prbr25_startgg_queries.common.config import (
+    EVENTS_PER_PAGE,
     POSTGRES_DB,
     POSTGRES_HOST,
     POSTGRES_PASSWORD,
@@ -9,6 +10,9 @@ from prbr25_startgg_queries.common.config import (
 )
 from prbr25_startgg_queries.common.list_utils import comma_separate_string_list
 from prbr25_startgg_queries.common.logger import setup_logger
+from prbr25_startgg_queries.extract.load_entrants_from_event import (
+    get_entrants_dict_list,
+)
 from prbr25_startgg_queries.extract.refresh_raw import (
     extract_event_and_phase_dfs_from_timestamp,
 )
@@ -17,6 +21,9 @@ from prbr25_startgg_queries.extract.tournament_from_url import (
 )
 from prbr25_startgg_queries.load.utils import load_pandas_dataframes_into_postgres
 from prbr25_startgg_queries.queries.sql_queries import get_update_query
+from prbr25_startgg_queries.transform.clean_entrants import (
+    create_dataframe_from_entrants_dict,
+)
 from prbr25_startgg_queries.transform.utils import (
     transform_tournaments_to_event_phases_df,
 )
@@ -76,3 +83,12 @@ def edit_filtered_column_from_id(ids: list, table_name: str, column_name: str, v
     id_cs = comma_separate_string_list(ids)
     query = get_update_query(table_name, column_name, id_cs, value)
     sql.execute_update(query)
+
+
+def update_entrants_table_from_event_id(event_id: int):
+    sql = Postgres(
+        POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DB, POSTGRES_PORT
+    )
+    entrants_dict_list = get_entrants_dict_list(event_id, EVENTS_PER_PAGE)
+    entrants_df = create_dataframe_from_entrants_dict(entrants_dict_list)
+    sql.insert_values_to_table(entrants_df, "entrants")

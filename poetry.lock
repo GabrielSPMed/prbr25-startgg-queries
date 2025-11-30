@@ -1172,7 +1172,7 @@ testing = ["coverage", "pytest", "pytest-benchmark"]
 
 [[package]]
 name = "prbr-rds-client"
-version = "0.2.0"
+version = "1.0.0"
 description = ""
 optional = false
 python-versions = ">=3.12"
@@ -1188,7 +1188,7 @@ sqlalchemy = ">=2.0.44,<3.0.0"
 type = "git"
 url = "https://github.com/GabrielSPMed/prbr-rds-client.git"
 reference = "HEAD"
-resolved_reference = "3082d621bcb073eb31bdb7d5a9fabef41d688a0d"
+resolved_reference = "2ae5f8e22341ae2faecb41bf445b237586b0026c"
 
 [[package]]
 name = "pre-commit"

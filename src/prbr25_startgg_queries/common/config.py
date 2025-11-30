@@ -14,10 +14,11 @@ MAX_DATE_LIMIT = int(environ["MAX_DATE_LIMIT"])
 MIN_DATE_LIMIT = int(environ["MIN_DATE_LIMIT"])
 COUNTRY_CODE = environ["COUNTRY_CODE"]
 STARTGG_VIDEOGAME_ID = int(environ["STARTGG_VIDEOGAME_ID"])
+EVENTS_PER_PAGE = 50
 
 events_dict = {
     "cCode": COUNTRY_CODE,
-    "perPage": 50,
+    "perPage": EVENTS_PER_PAGE,
     "cPage": 1,
     "videogameid": STARTGG_VIDEOGAME_ID,
     "online": False,
@@ -40,3 +41,4 @@ event_table_columns = [
 ]
 
 phase_table_columns = ["id", "name", "bracket_type", "event_id"]
+entrant_table_columns = ["id", "tag", "event_id", "url", "player_id", "validated"]

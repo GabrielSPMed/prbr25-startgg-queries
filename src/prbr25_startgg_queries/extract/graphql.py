@@ -83,3 +83,19 @@ class GraphQL:
         response = self.execute_query(query_name, query_parameters)
         logger.info("Query successful")
         return [response["tournament"]]
+
+    def query_all_pages(self, query_name: str, query_parameters: Dict) -> list:
+        queries = []
+        page_number = 1
+        logger.info(f"Starting StartGG queries for {query_name}")
+        while True:
+            logger.debug(f"Querying page {page_number}")
+            response = self.execute_query(query_name, query_parameters)
+            logger.debug(f"Finished page {page_number}")
+            queries.append(response)
+            if page_number == response["event"]["entrants"]["pageInfo"]["totalPages"]:
+                break
+            page_number += 1
+            query_parameters["cPage"] = page_number
+        logger.info("All queries finished successfully")
+        return queries

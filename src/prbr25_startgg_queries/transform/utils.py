@@ -1,8 +1,8 @@
 from typing import List, Tuple
 
 from pandas import DataFrame, to_datetime
+from prbr25_logger.logger import setup_logger
 
-from prbr25_startgg_queries.common.logger import setup_logger
 from prbr25_startgg_queries.transform.clean_events import (
     clean_event_and_phases_dataframes,
 )

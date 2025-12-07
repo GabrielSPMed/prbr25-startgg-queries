@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from typing import List, Tuple
 
+from prbr25_logger.logger import setup_logger
 from prbr25_rds_client.postgres import Postgres
 
 from prbr25_startgg_queries.common.config import (
@@ -8,7 +9,6 @@ from prbr25_startgg_queries.common.config import (
     STARTGG_BEARER_TOKEN,
     events_dict,
 )
-from prbr25_startgg_queries.common.logger import setup_logger
 from prbr25_startgg_queries.extract.graphql import GraphQL
 from prbr25_startgg_queries.queries.sql_queries import most_recent_raw_event_query
 

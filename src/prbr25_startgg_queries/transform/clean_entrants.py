@@ -1,7 +1,7 @@
 from pandas import DataFrame
+from prbr25_logger.logger import setup_logger
 
 from prbr25_startgg_queries.common.config import entrant_table_columns
-from prbr25_startgg_queries.common.logger import setup_logger
 
 logger = setup_logger(__name__)
 

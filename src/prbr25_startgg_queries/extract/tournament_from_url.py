@@ -1,10 +1,11 @@
 from typing import List
 
+from prbr25_logger.logger import setup_logger
+
 from prbr25_startgg_queries.common.config import (
     STARTGG_BEARER_TOKEN,
     STARTGG_VIDEOGAME_ID,
 )
-from prbr25_startgg_queries.common.logger import setup_logger
 from prbr25_startgg_queries.extract.graphql import GraphQL
 
 logger = setup_logger(__name__)

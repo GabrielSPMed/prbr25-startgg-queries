@@ -1,3 +1,4 @@
+from prbr25_logger.logger import setup_logger
 from prbr25_rds_client.postgres import Postgres
 
 from prbr25_startgg_queries.common.config import (
@@ -9,7 +10,6 @@ from prbr25_startgg_queries.common.config import (
     POSTGRES_USERNAME,
 )
 from prbr25_startgg_queries.common.list_utils import comma_separate_string_list
-from prbr25_startgg_queries.common.logger import setup_logger
 from prbr25_startgg_queries.extract.load_entrants_from_event import (
     get_entrants_dict_list,
 )

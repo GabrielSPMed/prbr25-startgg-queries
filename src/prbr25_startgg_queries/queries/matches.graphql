@@ -1,0 +1,22 @@
+query Matches ($phaseid: ID!, $cPage: Int!, $perPage: Int) {
+    phase(id: $phaseid) {
+        sets(page: $cPage, perPage: $perPage) {
+            nodes {
+                fullRoundText
+                slots(includeByes: true) {
+                    entrant {
+                        id
+                        name
+                    }
+                }
+                id
+                displayScore
+                winnerId
+            }
+            pageInfo {
+                totalPages
+            }
+        }
+        id
+    }
+}

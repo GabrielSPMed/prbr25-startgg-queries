@@ -10,6 +10,10 @@ from prbr25_startgg_queries.common.config import (
     POSTGRES_USERNAME,
 )
 from prbr25_startgg_queries.common.list_utils import comma_separate_string_list
+from prbr25_startgg_queries.extract.fetch_matches import (
+    fetch_all_matches,
+    fetch_phase_ids_from_event,
+)
 from prbr25_startgg_queries.extract.load_entrants_from_event import (
     get_entrants_dict_list,
 )
@@ -23,6 +27,9 @@ from prbr25_startgg_queries.load.utils import load_pandas_dataframes_into_postgr
 from prbr25_startgg_queries.queries.sql_queries import get_update_query
 from prbr25_startgg_queries.transform.clean_entrants import (
     create_dataframe_from_entrants_dict,
+)
+from prbr25_startgg_queries.transform.clean_matches import (
+    create_dataframe_from_raw_matches_list,
 )
 from prbr25_startgg_queries.transform.utils import (
     transform_tournaments_to_event_phases_df,
@@ -92,3 +99,12 @@ def update_entrants_table_from_event_id(event_id: int):
     entrants_dict_list = get_entrants_dict_list(event_id, EVENTS_PER_PAGE)
     entrants_df = create_dataframe_from_entrants_dict(entrants_dict_list)
     sql.insert_values_to_table(entrants_df, "entrants")
+
+
+def fetch_matches_df(event_id: int):
+    sql = Postgres(
+        POSTGRES_USERNAME, POSTGRES_PASSWORD, POSTGRES_HOST, POSTGRES_DB, POSTGRES_PORT
+    )
+    phase_list = fetch_phase_ids_from_event(sql, event_id)
+    raw_matches = fetch_all_matches(phase_list, EVENTS_PER_PAGE)
+    return create_dataframe_from_raw_matches_list(raw_matches)

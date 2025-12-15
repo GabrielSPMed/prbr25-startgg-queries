@@ -42,3 +42,15 @@ event_table_columns = [
 
 phase_table_columns = ["id", "name", "bracket_type", "event_id"]
 entrant_table_columns = ["id", "tag", "event_id", "url", "player_id", "validated"]
+matches_table_columns = [
+    "player_1_id",
+    "player_2_id",
+    "player_1_gamecount",
+    "player_2_gamecount",
+    "winning_player_id",
+    "losing_player_id",
+    "phase_id",
+    "round",
+    "dq",
+    "id",
+]

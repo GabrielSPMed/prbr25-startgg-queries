@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "startgg-queries"
-version = "1.3.0"
+version = "2.0.0"
 description = ""
 authors = []
 readme = "README.md"
@@ -17,6 +17,7 @@ sqlalchemy = "^2.0.43"
 psycopg2-binary = "^2.9.10"
 prbr-rds-client = { git = "https://github.com/GabrielSPMed/prbr-rds-client.git" }
 prbr25-logger = { git = "https://github.com/GabrielSPMed/prbr25-logger" }
+prbr25-weights = { git = "https://github.com/GabrielSPMed/prbr25-weights" }
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

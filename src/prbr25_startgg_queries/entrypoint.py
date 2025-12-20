@@ -20,6 +20,7 @@ from prbr25_startgg_queries.extract.load_entrants_from_event import (
 from prbr25_startgg_queries.extract.refresh_raw import (
     extract_event_and_phase_dfs_from_timestamp,
 )
+from prbr25_startgg_queries.extract.standings import fetch_standings_from_event_id
 from prbr25_startgg_queries.extract.tournament_from_url import (
     request_tournament_from_url,
 )
@@ -30,6 +31,9 @@ from prbr25_startgg_queries.transform.clean_entrants import (
 )
 from prbr25_startgg_queries.transform.clean_matches import (
     create_dataframe_from_raw_matches_list,
+)
+from prbr25_startgg_queries.transform.extract_standings import (
+    create_standings_dataframe_from_response,
 )
 from prbr25_startgg_queries.transform.utils import (
     transform_tournaments_to_event_phases_df,
@@ -108,3 +112,9 @@ def fetch_matches_df(event_id: int):
     phase_list = fetch_phase_ids_from_event(sql, event_id)
     raw_matches = fetch_all_matches(phase_list, EVENTS_PER_PAGE)
     return create_dataframe_from_raw_matches_list(raw_matches)
+
+
+def fetch_raw_standings_df(event_id: int):
+    raw_standings = fetch_standings_from_event_id(event_id, EVENTS_PER_PAGE)
+    raw_standings_df = create_standings_dataframe_from_response(raw_standings)
+    return raw_standings_df

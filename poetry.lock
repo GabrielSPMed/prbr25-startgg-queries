@@ -1410,6 +1410,22 @@ reference = "HEAD"
 resolved_reference = "ed26400ca9f908ea95d2b87e9ebeef667b0ed197"
 
 [[package]]
+name = "prbr25-weights"
+version = "1.0.0"
+description = ""
+optional = false
+python-versions = ">=3.12"
+groups = ["main"]
+files = []
+develop = false
+
+[package.source]
+type = "git"
+url = "https://github.com/GabrielSPMed/prbr25-weights"
+reference = "HEAD"
+resolved_reference = "fbdd5b4921bb50024c2f027870f55866acd2a0f9"
+
+[[package]]
 name = "pre-commit"
 version = "4.5.0"
 description = "A framework for managing and maintaining multi-language pre-commit hooks."
@@ -2234,4 +2250,4 @@ propcache = ">=0.2.1"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4.0"
-content-hash = "588969c6345860b0808653a67a1a5706accd8cf68437820f50184ab61cc20ae6"
+content-hash = "24545545445ea7460577f0f90c360059e065224ae71373e042561b0c9d12d6de"

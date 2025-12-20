@@ -1,0 +1,17 @@
+query Event ($eventid: ID!, $cPage: Int!, $perPage: Int){
+    event(id: $eventid) {
+        id
+        standings(query: { page: $cPage, perPage: $perPage }) {
+            pageInfo {
+                totalPages
+            }
+            nodes {
+                entrant {
+                    id
+                }
+                id
+                placement
+            }
+        }
+    }
+}

@@ -54,3 +54,11 @@ matches_table_columns = [
     "dq",
     "id",
 ]
+standings_table_columns = [
+    "id",
+    "event_id",
+    "standing",
+    "player_id",
+    "dq",
+    "perf_score",
+]
